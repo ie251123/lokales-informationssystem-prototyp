@@ -154,6 +154,11 @@ dependencies = [
     { name = "pdfplumber" },
 ]
 
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "pytest" },
@@ -163,7 +168,9 @@ dev = [
 requires-dist = [
     { name = "jsonschema", specifier = ">=4.26.0" },
     { name = "pdfplumber", specifier = ">=0.11" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
 ]
+provides-extras = ["dev"]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=8" }]
