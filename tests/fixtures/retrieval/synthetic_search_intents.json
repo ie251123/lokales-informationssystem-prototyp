@@ -1,0 +1,51 @@
+{
+  "version": "synthetic_search_intents_v1",
+  "cases": [
+    {
+      "question_id": "synthetic_question_alpha",
+      "intent": {
+        "schema_version": "2.0",
+        "query_text": "Welche Prüfintervalle gelten für Sensor Alpha und welche Wartung ist geplant?",
+        "facets": [
+          {
+            "facet_type": "requirement",
+            "terms": ["Prüfintervalle", "Sensor Alpha"],
+            "statement_types": ["requirement"],
+            "required": true
+          },
+          {
+            "facet_type": "planning_measure",
+            "terms": ["Wartung", "Sensor Alpha"],
+            "statement_types": ["planning_measure"],
+            "required": false
+          }
+        ],
+        "search_terms": ["Prüfintervalle Sensor Alpha", "Wartung Sensor Alpha"],
+        "result_limit": 8
+      }
+    },
+    {
+      "question_id": "synthetic_question_beta",
+      "intent": {
+        "schema_version": "2.0",
+        "query_text": "Welche Oberflächenfarbe und welche Seriennummer hat Bauteil X-01?",
+        "facets": [
+          {
+            "facet_type": "object_property",
+            "terms": ["Oberflächenfarbe", "Bauteil X-01"],
+            "statement_types": ["finding"],
+            "required": true
+          },
+          {
+            "facet_type": "project_finding",
+            "terms": ["Seriennummer", "Bauteil X-01"],
+            "statement_types": ["finding"],
+            "required": true
+          }
+        ],
+        "search_terms": ["Oberflächenfarbe Bauteil X-01", "Seriennummer Bauteil X-01"],
+        "result_limit": 8
+      }
+    }
+  ]
+}

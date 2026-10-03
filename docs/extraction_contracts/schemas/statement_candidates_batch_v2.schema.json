@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-information-system/schemas/extraction_contracts/statement_candidates_batch_v2.schema.json",
+  "title": "Statement Candidates Batch v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "package_version",
+    "contract_version",
+    "batch_binding",
+    "node_processing",
+    "candidates",
+    "relations"
+  ],
+  "properties": {
+    "package_version": { "const": "statement_candidates_batch_v2" },
+    "contract_version": { "const": "statement_candidates_batch_v2" },
+    "batch_binding": { "$ref": "#/$defs/batch_binding" },
+    "node_processing": {
+      "type": "array",
+      "items": {
+        "$ref": "https://local-information-system/schemas/extraction_contracts/statement_candidates_v1.schema.json#/$defs/node_processing"
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "https://local-information-system/schemas/extraction_contracts/statement_candidates_v1.schema.json#/$defs/candidate"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://local-information-system/schemas/extraction_contracts/statement_candidates_v1.schema.json#/$defs/relation"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "node_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "batch_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id",
+        "document_id",
+        "document_version_id",
+        "document_sha256",
+        "batch_manifest_sha256",
+        "batch_id",
+        "batch_number",
+        "total_batches",
+        "target_node_ids",
+        "context_node_ids",
+        "model_name",
+        "prompt_version",
+        "input_sha256",
+        "prompt_sha256",
+        "batch_sha256"
+      ],
+      "properties": {
+        "project_id": { "type": "string", "minLength": 1 },
+        "document_id": { "type": "string", "minLength": 1 },
+        "document_version_id": { "type": "string", "minLength": 1 },
+        "document_sha256": { "$ref": "#/$defs/sha256" },
+        "batch_manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "batch_id": { "type": "string", "pattern": "^batch_[0-9]{3,}$" },
+        "batch_number": { "type": "integer", "minimum": 1 },
+        "total_batches": { "type": "integer", "minimum": 1 },
+        "target_node_ids": { "$ref": "#/$defs/node_ids" },
+        "context_node_ids": { "$ref": "#/$defs/node_ids" },
+        "model_name": { "type": "string", "minLength": 1 },
+        "prompt_version": { "const": "statement_candidates_frontier_v2" },
+        "input_sha256": { "$ref": "#/$defs/sha256" },
+        "prompt_sha256": { "$ref": "#/$defs/sha256" },
+        "batch_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

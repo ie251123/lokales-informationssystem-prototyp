@@ -1,0 +1,93 @@
+# --- Secrets / lokale Konfiguration ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.token
+secrets/
+credentials/
+config.local.*
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.pytest-*-temp*/
+.pytest-public-temp/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Virtuelle Umgebungen / Conda ---
+.venv/
+venv/
+env/
+ENV/
+conda-meta/
+
+# --- Build / Packaging ---
+build/
+dist/
+*.egg-info/
+
+# --- IDE / Editor ---
+.vscode/
+
+# --- Betriebssystem ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs / temporäre Dateien ---
+logs/
+*.log
+tmp/
+temp/
+.test-tmp/
+.cache/
+
+# --- Datenbanken / lokale Indizes ---
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.db-journal
+
+# --- Lokale Daten / Dokumente ---
+data/raw/
+data/private/
+data/interim/
+data/processed/
+uploads/
+
+# Platzhalter erlauben, damit Ordnerstruktur im Repo bleibt
+!data/raw/.gitkeep
+!data/private/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# --- Vektor-/Suchindizes ---
+vectorstore/
+faiss_index/
+index/
+*.faiss
+*.idx
+
+# --- Lokale Modelle ---
+models/
+*.onnx
+*.ckpt
+*.pt
+*.pth
+*.gguf
+*.bin
+*.safetensors
+
+# --- Exportierte Ergebnisse ---
+exports/
+reports/generated/

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-information-system/schemas/construction/statement_candidate_input_v1.schema.json",
+  "title": "Statement Candidate Input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "package_version",
+    "contract_version",
+    "prompt_version",
+    "project_id",
+    "document_id",
+    "document_version_id",
+    "document_sha256",
+    "document_nodes_package_sha256",
+    "source_node_count",
+    "source_nodes",
+    "excluded_nodes",
+    "instructions",
+    "package_sha256"
+  ],
+  "properties": {
+    "package_version": { "const": "statement_candidate_input_v1" },
+    "contract_version": { "const": "statement_candidates_v1" },
+    "prompt_version": { "const": "statement_candidates_frontier_v1" },
+    "project_id": { "type": "string", "minLength": 1 },
+    "document_id": { "type": "string", "minLength": 1 },
+    "document_version_id": { "type": "string", "minLength": 1 },
+    "document_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "document_nodes_package_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_node_count": { "type": "integer", "minimum": 0 },
+    "source_nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_node" }
+    },
+    "excluded_nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/excluded_node" }
+    },
+    "instructions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_status",
+        "allowed_statement_types",
+        "forbidden_relation_types",
+        "source_text_only"
+      ],
+      "properties": {
+        "review_status": { "const": "needs_review" },
+        "allowed_statement_types": {
+          "const": ["requirement", "planning_measure", "finding", "decision"]
+        },
+        "forbidden_relation_types": { "const": ["fulfills"] },
+        "source_text_only": { "const": true }
+      }
+    },
+    "package_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "source_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_node_id",
+        "node_path",
+        "element_type",
+        "page",
+        "section_number",
+        "heading",
+        "locator",
+        "source_text"
+      ],
+      "properties": {
+        "document_node_id": { "type": "string", "minLength": 1 },
+        "node_path": { "type": "string", "minLength": 1 },
+        "element_type": { "const": "page_text" },
+        "page": { "type": "integer", "minimum": 1 },
+        "section_number": { "type": ["string", "null"] },
+        "heading": { "type": ["string", "null"] },
+        "locator": { "type": ["string", "null"] },
+        "source_text": { "type": "string", "minLength": 1 }
+      }
+    },
+    "excluded_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_node_id",
+        "node_path",
+        "element_type",
+        "page",
+        "section_number",
+        "heading",
+        "locator",
+        "exclusion_reason"
+      ],
+      "properties": {
+        "document_node_id": { "type": "string", "minLength": 1 },
+        "node_path": { "type": "string", "minLength": 1 },
+        "element_type": {
+          "enum": ["document_root", "section", "empty_page", "non_citable_text"]
+        },
+        "page": { "type": ["integer", "null"], "minimum": 1 },
+        "section_number": { "type": ["string", "null"] },
+        "heading": { "type": ["string", "null"] },
+        "locator": { "type": ["string", "null"] },
+        "exclusion_reason": {
+          "enum": ["non_citable", "not_a_page_text_node"]
+        }
+      }
+    }
+  }
+}
